@@ -5,13 +5,7 @@
 		</div>
 		<div class="head-rigth">
 			<nav class="bottom-menu">
-				<ul class="top-menu-list">
-					<li class="bottom-menu-item"><a href="#">Home</a></li>
-					<li class="bottom-menu-item"><a href="#">About</a></li>
-					<li class="bottom-menu-item"><a href="#">Products</a></li>
-					<li class="bottom-menu-item"><a href="#">Testimonials</a></li>
-					<li class="bottom-menu-item"><a href="#">Contact</a></li>
-				</ul>
+
 				<?php wp_nav_menu( [
 					'theme_location'  => 'footer',
 					'menu'            => '',

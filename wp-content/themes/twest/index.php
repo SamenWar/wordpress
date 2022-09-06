@@ -8,8 +8,8 @@ get_header();
 
     <section class="seo-sectiom">
         <div class="left-block">
-            <H1 class="shrift">Superstar SEO</H1>
-            <p class="shrift">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam amet, platea diam rhoncus, sem tortor, turpis ac tincidunt. Nisi adipiscing a suspendisse justo eleifend volutpat et vitae ac. Consequat in mi iaculis hendrerit mauris mattis. Lacus risus amet at magna urna. Felis nec orci a, quis nullam vel sem nunc enim. Sit mi tellus eget commodo augue.</p>
+            <H1 class="shrift"><?php echo  get_field('name_');?></H1>
+            <p class="shrift"><?php echo  get_field('description');?></p>
             <div class="button-green seo-button">
                 <a href="#" class="seo">Learn More</a>
             </div>
@@ -23,7 +23,12 @@ get_header();
     <div data-target='right' class="side-nav side-nav--right"></div>
     <div data-target='left' class="side-nav side-nav--left"></div>
 
-    <section class="slider">
+    <section class="slider"><?php
+        $args = array(
+        'post_type' => 'review'
+        );
+
+        ?>
         <div class="slider slider-1" data-slider="itc-slider" data-loop="false">
 
             <div class="slide-panel">
@@ -39,20 +44,52 @@ get_header();
                 </div>
             </div>
             <div class="slider__wrapper">
+                <?php
+
+                $query = new WP_Query( $args );
+
+
+                while ( $query->have_posts() ) {
+	                $query->the_post();
+
+                }
+                if ( $query->have_posts() ) {
+	                while ( $query->have_posts() ) {
+		                $query->the_post();
+                function do_excerpt($string, $word_limit) {
+	                $words = explode(' ', $string, ($word_limit + 1));
+	                if (count($words) > $word_limit)
+		                array_pop($words);
+	                echo implode(' ', $words).' ...';
+                }
+		                ?>
+
+
                 <div class="slider__items">
                     <div class="slider__item">
                         <div class="slide">
                             <div class="image-slide">
-                                <img src="assets/img/img1.jpg" alt="l">
+                              <?php ?>
                             </div>
                             <div class="text">
-                                <div class="ex shrift">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipiscing diam, tortor, egestas euismod neque venenatis, viverra. Ante nibh morbi egestas quam lorem ipsum. Eget sit praesent a laoreet. Mi, phasellus quis mauris sollicitudin non. Iaculis ac duis mauris enim. “</div>
-                                <div class="title shrift">Frank Hardy</div>
-                                <p class="shrift">Your Marketing Crew CEO</p>
+                                <div class="ex shrift"><?php echo do_excerpt(the_excerpt(), 30);?></div>
+                                <div class="title shrift"><?php echo get_field('author'); ?></div>
+                                <p class="shrift"><?php echo get_field('position');
+                                ?></p>
                             </div>
 
                         </div>
                     </div>
+                    <?php
+                            }
+                        }
+                    else {
+	                // Постов не найдено
+                        }
+
+                    // Возвращаем оригинальные данные поста. Сбрасываем $post.
+                       wp_reset_postdata();
+                    ?>
                     <div class="slider__item">
                         <div class="slide second-slide">
 

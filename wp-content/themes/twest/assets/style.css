@@ -35,11 +35,15 @@
 
 }
 
-.top-menu-list{
+.head-nav{
     display: flex;
     list-style-type: none;
 }
-.top-menu-item{
+.top-menu-list ul{
+    display: flex;
+    list-style-type: none;
+}
+.page_item a{
     margin-right: 25px;
     font-family: Montserrat;
     height: 40px;
